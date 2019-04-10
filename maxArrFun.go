@@ -2,7 +2,8 @@ package main
 
 import "fmt"
 
-func max(a [5]int) (err int, val int) {
+func max(a [3]int) (val int, err int) {
+
 	if len(a) == 0 {
 		err = -1
 	}
@@ -14,50 +15,49 @@ func max(a [5]int) (err int, val int) {
 	val = a[0]
 
 	i := 1
-	for i < len(a) {
+	j := len(a)
+	for i != j {
 		if a[i] < 0 {
 			err = -2
 		}
 		if a[i] > val {
 			val = a[i]
 		}
+		i++
 	}
-	return
+	return val, err
 }
 
-func test(a [5]int) {
-	fail, maxval := max(a)
+func test(a [3]int) {
+	maxval, fail := max(a)
 
 	fmt.Println("Printing array... ")
 	fmt.Println(a)
 
 	if fail < 0 {
-		fmt.Println("FAIL => error code: ")
-		fmt.Println(fail)
+		fmt.Printf("FAIL => error code: %d\n", fail)
 	} else {
-		fmt.Println("The maximum value in the array is: ")
-		fmt.Println(maxval)
+		fmt.Printf("The maximum value in the array is: %d\n", maxval)
 	}
 }
 
 func main() {
-	var a1 [5]int
+	var a1 [3]int
 	a1[0] = 5
 	a1[1] = 9
 	a1[2] = 3
-	a1[3] = 9
-	a1[4] = 7
 
-	var a2 [5]int
+	var a2 [3]int
 
-	var a3 [5]int
+	var a3 [3]int
 	a3[0] = 5
 	a3[1] = -9
 	a3[2] = 3
-	a3[3] = 2
-	a3[4] = 6
 
+	fmt.Println()
 	test(a1)
+	fmt.Println()
 	test(a2)
+	fmt.Println()
 	test(a3)
 }
